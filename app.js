@@ -16,9 +16,12 @@ window.addEventListener('load', () => {
             return response.json();
           })
           .then((data) => {
+            const descriptionString =
+              data.weather[0].description.charAt(0).toUpperCase() +
+              data.weather[0].description.slice(1);
             iconImgSet.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
             temperature.textContent = Math.round(data.main.temp);
-            description.textContent = `${data.weather[0].description}, wind ${data.wind.speed}m/s`;
+            description.innerHTML = `${descriptionString},<br> wind ${data.wind.speed} m/s`;
             location.textContent = data.name;
           });
       } catch (error) {
